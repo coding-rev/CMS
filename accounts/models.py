@@ -5,20 +5,23 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CustomerUserManager(BaseUserManager):
-    def create_user(self,phone_number, password, **extra_fields):
+    
+    """A custom manager for CustomUser model that uses phone_number as the unique identifier.
+    """
+    def create_user(self,phone_number, password=None, **extra_fields):
         """
         Create User with the given phone_number and password
         
         """
         if not phone_number:
-            raise ValueError(_("The phone_number must be set."))
+            raise ValueError(_("The phone_number must be provided."))
         user = self.model(phone_number=phone_number,**extra_fields) 
         user.set_password(password)
-        user.save()
+        user.save(using=self._db)
         return user
 
 
-    def create_superuser(self,phone_number, password, **extra_fields):
+    def create_superuser(self,phone_number, password=None, **extra_fields):
         """
         Create Superuser with the given phone_number and password
 

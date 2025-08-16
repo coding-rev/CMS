@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import environ
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -132,7 +132,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # # Celery / Redis config
-# CELERY_BROKER_URL = env('REDIS_URL', default='redis://localhost:6379/0')
-# CELERY_RESULT_BACKEND = env('REDIS_URL', default='redis://localhost:6379/0')
+CELERY_BROKER_URL = f'redis://{os.getenv("REDIS_HOST")}:6379/0'
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 
-
+CELERY_BEAT_SCHEDULE = {
+    # Define periodic tasks here
+    # 'task_name': {
+    #     'task': 'app_name.task_function',
+    #     'schedule': 60.0,  # every 60 seconds
+    # },
+}
