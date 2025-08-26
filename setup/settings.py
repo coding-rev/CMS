@@ -83,13 +83,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',  # default to SQLite
         'NAME': BASE_DIR / 'db.sqlite3',  # default database file
-        # UNCOMMENT BELOW TO USE POSTGRESQL
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': env('POSTGRES_DB'),  # default database name
-        # 'USER': env('POSTGRES_USER'),
-        # 'PASSWORD': env('POSTGRES_PASSWORD'),
-        # 'HOST': env('POSTGRES_HOST'),
-        # 'PORT': env('POSTGRES_PORT'),   
+        # COMMENT BELOW TO Change the DB from POSTGRESQL
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('POSTGRES_DB'),  # default database name
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': env('POSTGRES_PORT'),   
     }
 }
 
